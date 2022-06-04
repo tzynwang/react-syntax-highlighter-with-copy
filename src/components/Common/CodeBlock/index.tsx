@@ -16,8 +16,8 @@ const CodeContainer = styled('div')(() => ({
 }));
 const IconButton = styled(Button)(({ theme }) => ({
   position: 'absolute',
-  top: '1rem',
-  right: '1rem',
+  top: 0,
+  right: 0,
   opacity: 0,
   transition: `opacity ${theme.transitions.duration.shortest}ms ${theme.transitions.easing.easeIn}`
 }));
@@ -47,16 +47,19 @@ function CodeBlock(props: CodeBlockProps): React.ReactElement {
 
   /* Main */
   return (
-    <React.Fragment>
-      <CodeContainer>
-        <Code style={style} {...rest}>
-          {code}
-        </Code>
-        <IconButton onClick={handleIconButtonClick} className="IconButton">
-          {copyIcon}
-        </IconButton>
-      </CodeContainer>
-    </React.Fragment>
+    <CodeContainer className="CodeContainer">
+      <Code style={style} {...rest}>
+        {code}
+      </Code>
+      <IconButton
+        onClick={handleIconButtonClick}
+        className="IconButton"
+        disableFocusRipple
+        disableRipple
+      >
+        {copyIcon}
+      </IconButton>
+    </CodeContainer>
   );
 }
 
