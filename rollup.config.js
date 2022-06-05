@@ -2,8 +2,9 @@ import commonjs from '@rollup/plugin-commonjs';
 import dts from 'rollup-plugin-dts';
 import json from '@rollup/plugin-json';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 
 export default [
   {
@@ -12,19 +13,21 @@ export default [
       {
         dir: 'lib',
         format: 'esm',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
         sourcemap: true
       }
     ],
     plugins: [
+      peerDepsExternal(),
       json(),
-      nodeResolve(),
       commonjs(),
+      nodeResolve(),
       typescript({
         tsconfig: 'tsconfig.bundle.json'
       }),
       terser()
-    ],
-    external: ['react', 'react-dom']
+    ]
   },
   {
     input: 'lib/types/index.d.ts',
