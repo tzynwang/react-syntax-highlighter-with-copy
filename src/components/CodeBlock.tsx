@@ -6,7 +6,18 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import useCopy from '@Hooks/useCopy';
-import type { CodeBlockProps } from './types';
+// import type { CodeBlockProps } from './types';
+import type { SyntaxHighlighterProps } from 'react-syntax-highlighter';
+
+type SyntaxHighlighterPropsWithoutChildren = Omit<
+  SyntaxHighlighterProps,
+  'children'
+>;
+
+export interface CodeBlockProps extends SyntaxHighlighterPropsWithoutChildren {
+  code: string;
+  style?: { [key: string]: React.CSSProperties };
+}
 
 const CodeContainer = styled('div')(() => ({
   position: 'relative',
